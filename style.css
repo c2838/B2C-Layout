@@ -1,0 +1,494 @@
+/* common setting */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+  /* 拿掉前方圈圈 */
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  /* 拿掉底線 */
+}
+
+input {
+  text-align: center;
+}
+
+.container {
+  width: 85%;
+  height: auto;
+  margin: 0 auto 3rem auto;
+}
+
+/* Main header */
+header {
+  width: 100%;
+  height: 65px;
+  z-index: 999;
+  position: fixed;
+  display: grid;
+  grid-template-columns: 1fr 70% 1fr;
+  grid-auto-rows: auto;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-brand {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-name {
+  flex-shrink: 0;
+  margin-right: 0.1rem;
+  font-size: 1rem;
+  color: black;
+}
+
+.registered {
+  transform: translate(0, -0.2rem);
+  /* 調整R標位置 */
+}
+
+nav {
+  width: 100%;
+  position: absolute;
+  /* 脫離頁面流 */
+  top: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1, 0);
+  /* 手機板nav不顯示，有點漢堡排才展開 */
+  /*  漢堡排動畫  */
+  transform-origin: top;
+  transition: transform 0.2s ease-out;
+}
+
+.navbar-toggle:checked~nav {
+  transform: scale(1, 1);
+  /* if checked，漢堡排選單展開 */
+}
+
+.nav-item {
+  margin-bottom: 0.5rem;
+  opacity: 0;
+}
+
+.navbar-toggle:checked~nav .nav-item {
+  /*  有點漢堡排才顯示，動畫為延遲顯示用  */
+  opacity: 1;
+  transition: opacity 0.2s ease-out 0.15s;
+}
+
+.navbar {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar-toggle {
+  display: none;
+  /* 取消顯示checkbox */
+}
+
+.navbar-toggle-label {
+  display: flex;
+  /* 可使inline撐開高度 */
+}
+
+.hamburger,
+/* 做漢堡排 */
+.hamburger::before,
+.hamburger::after {
+  width: 32px;
+  height: 4px;
+  background: black;
+}
+
+.hamburger {
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  position: absolute;
+  left: 0;
+  content: "";
+}
+
+.hamburger::before {
+  top: 10px;
+}
+
+.hamburger::after {
+  bottom: 10px;
+}
+
+.logo-img {
+  display: block;
+  height: 100%;
+  width: 45px;
+  margin-right: 0.8rem;
+}
+
+.icon-items {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.search-icon-2 {
+  display: none;
+  /* 手機板search icon在左邊，故右邊取消顯示 */
+}
+
+.bag {
+  margin-left: 0.8rem;
+}
+
+/* intro */
+.intro-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 90px;
+  /* header為fixed，故需撐開高度 */
+}
+
+.subtitle {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+}
+
+.select-items {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 0.8rem 3rem;
+  grid-template-areas:
+    "size color"
+    "sort sort";
+}
+
+.size,
+.color,
+.sort {
+  height: 45px;
+  border: 1.5px solid #a9a9a9;
+  border-radius: 5px;
+}
+
+.size,
+.color {
+  width: 100%;
+}
+
+.size {
+  grid-area: size;
+}
+
+.color {
+  grid-area: color;
+}
+
+.sort {
+  width: 44%;
+  grid-area: sort;
+  justify-self: center;
+}
+
+/* products */
+.products-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+}
+
+.product-card {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.product-card-imgs {
+  /* 圖片容器 */
+  width: 100%;
+  position: relative;
+  /* 圖片定位參考 */
+  padding-top: 100%;
+  /* 設定padding將高度撐開，使圖片長寬可以固定在grid大小內，不隨圖片尺寸改變排版 */
+}
+
+.product-cover,
+.product-sample {
+  display: block;
+  /* 避免vertical-align(inline預設)屬性 */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* 使兩張圖片都可以脫離頁面流 */
+  top: 0;
+  left: 0;
+}
+
+.product-sample {
+  opacity: 0;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.5s ease-out;
+}
+
+.product-card:hover .product-cover {
+  opacity: 0;
+}
+
+.product-card:hover .product-sample {
+  opacity: 1;
+}
+
+.product-fav {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  background: white;
+  border-radius: 99em;
+}
+
+.product-info {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.product-price {
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}
+
+/* pagination */
+.pagination-number {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* more about */
+.more-about .container {
+  height: 270px;
+  width: 100%;
+  margin-bottom: 0;
+  /*  背景圖  */
+  background-image: url(https://assets-lighthouse.alphacamp.co/uploads/image/file/14376/template.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.about-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-info {
+  margin-top: 2.4rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.email {
+  width: 85%;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: auto;
+  margin-bottom: 1rem;
+}
+
+.email-input {
+  height: 45px;
+  width: 100%;
+  border: 0px;
+  border-radius: 99em 0 0 99em;
+  font-size: 1rem;
+}
+
+.email-sign-up-btn {
+  background: black;
+  border: 0px;
+  border-radius: 0 99em 99em 0;
+  font-size: 1rem;
+  color: white;
+}
+
+.statement {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.about-policy-herf {
+  color: black;
+  text-decoration: underline;
+}
+
+/* footer */
+.copyright {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+/* 桌機版 */
+
+@media screen and (min-width: 600px) {
+
+  /*  subtitle  */
+  .select-items {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "size color sort";
+    grid-gap: 0.5rem;
+  }
+
+  .sort {
+    width: 100%;
+  }
+
+  /*  products  */
+  .products-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /*  moreabout  */
+  .email {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+
+  /*  header  */
+  header {
+    grid-template-columns: 1fr minmax(300px, 1fr) 1fr;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .navbar-brand {
+    justify-content: flex-start;
+    margin-left: 2%;
+  }
+
+  .brand-name {
+    font-size: 1.4rem;
+  }
+
+  nav {
+    position: static;
+    /* 回歸頁面流 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0);
+    /* 漢堡排選單時有背景色，此處取消 */
+    transform: scale(1, 1);
+    /* 撐開高度 */
+  }
+
+  .nav-list {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    font-size: 1.1rem;
+  }
+
+  .nav-item {
+    opacity: 1;
+    /* 使文字可見(對應有做漢堡排) */
+  }
+
+  .search-icon-2 {
+    display: block;
+  }
+
+  .bag {
+    margin-left: 1.2rem;
+  }
+
+  .heart {
+    margin-left: 1.2rem;
+  }
+
+  /*  subtitle  */
+  .subtitle {
+    font-size: 1.8rem;
+  }
+
+  .select-items {
+    width: 45%;
+  }
+
+  .size,
+  .color,
+  .sort {
+    font-size: 1rem;
+  }
+
+  /*  products  */
+  .products-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /*  moreabout  */
+  .more-about .container {
+    width: 85%;
+  }
+
+  .email {
+    width: 45%;
+  }
+}

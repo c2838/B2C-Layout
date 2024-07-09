@@ -1,4 +1,4 @@
-# todolist
+# B2C-Layout
 此專案為繳交 Alpha Camp Dev C4 M2 指標作業所製作。
 運用 HTML5 與 CSS3 進行 RWD 響應式網頁切版練習。
 
